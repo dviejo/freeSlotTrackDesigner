@@ -18,8 +18,9 @@ guideHeight = 6;
 guideHoleHeight = 3;
 guideSupportLength = 7;
 guideLength = guideSupportLength + 2 + numSlots*4;
+engineHolderHoleSep = 20;
 
-module guide()
+module guide(chassisLink=1)
 difference()
 {
     cube([guideWidth, guideLength, guideHeight], center=true);
@@ -31,6 +32,13 @@ difference()
     {
         translate([-guideWidth/2-1, -guideLength/2 + guideSupportLength +i*4, -guideHeight/2+guideHoleHeight])
             rotate([0, 90, 0]) cylinder(d=2, h=guideWidth+2);
+    }
+    
+    if(chassisLink==1)
+    for(i=[-1,1])
+    {
+        translate([i*engineHolderHoleSep/2, (guideSupportLength-guideLength)/2, -guideHeight/2-1+guideHeight/4+1+0.3]) cylinder(d=2.5, h=guideHeight/2+2);
+        translate([i*engineHolderHoleSep/2, (guideSupportLength-guideLength)/2, -guideHeight/2-1]) cylinder(d=5, h=guideHeight/4+1);
     }
 }
 
