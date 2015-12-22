@@ -70,4 +70,29 @@ difference()
     }
 }
 
-guide();
+module lateral(side=-1)
+difference()
+{
+    guide();
+    translate([side*2.5, 0, 0]) cube([guideWidth, guideLength+6, guideHeight*3], center=true);
+}
+
+translate([0, 0, guideHeight/2])
+difference()
+{
+    guide();
+    translate([guideWidth/2-2.51, -30, -10]) cube([10, 60, 30]);
+    translate([-guideWidth/2-0.005, -30, -10]) cube([2.51, 60, 30]);
+}
+
+translate([30, 0, 2.5/2]) 
+    rotate([0, 90, 0]) translate([-(guideWidth-2.5)/2, 0, 0]) lateral();
+translate([-30, 0, 2.5/2]) 
+    rotate([0, -90, 0]) translate([(guideWidth-2.5)/2, 0, 0]) lateral(side=1);
+
+difference()
+{
+    translate([-guideWidth/2, 0, 0]) cube([guideWidth, 6, 2.0]);
+    translate([-guideInternalWidth/2+1.5, 6/2, -1]) cylinder(d=2, h=4);
+    translate([guideInternalWidth/2-1.5, 6/2, -1]) cylinder(d=2, h=4);
+}
