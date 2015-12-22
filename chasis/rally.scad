@@ -22,19 +22,28 @@ engineHolderHoleSep = 20;
 
 //front axle
 axleLength = 27;
-bearingDiam = 4.9;
-axleHeight = 7;
+bearingDiam = 5;
+axleHeight = 6.75;
 
 
 module guide(chassisLink=1)
 difference()
 {
-    cube([guideWidth, guideLength, guideHeight], center=true);
+    union()
+    {
+        cube([guideWidth, guideLength, guideHeight], center=true);
+        translate([0, -guideLength/2 + axleLength, 0]) hull()
+        {
+            cube([guideWidth, bearingDiam*2.5, guideHeight], center = true);
+            translate([0, 0, axleHeight+1]) cube([guideWidth, bearingDiam*1.85, 2], center=true);
+        }
+    }
     
-    translate([0, guideSupportLength-1.5, 0]) cube([guideInternalWidth, guideLength, guideHeight+2], center=true);
+    //main holes
+    translate([0, guideSupportLength-1.5, 0]) cube([guideInternalWidth, guideLength, guideHeight*2], center=true);
     translate([0, 0, guideHoleHeight-1.25]) cube([guideInternalWidth, guideLength+2, guideHeight], center=true);
     translate([0, -(guideLength-6)/2-0.25, guideHoleHeight-1.25]) cube([25, 6, guideHeight], center=true);
-    translate([0, guideSupportLength+6, 0]) cube([guideWidth - 2*2.5, guideLength, guideHeight+2], center=true);
+    translate([0, guideSupportLength+6, 0]) cube([guideWidth - 2*2.5, guideLength, guideHeight*3], center=true);
     
     for(i=[1:numSlots])
     {
@@ -49,13 +58,14 @@ difference()
         translate([i*engineHolderHoleSep/2, (guideSupportLength-guideLength)/2-0.75, -guideHeight/2-1]) cylinder(d=5, h=guideHeight/4+1.5);
     }
     
-    #translate([0, -guideLength/2 + axleLength, 7-bearingDiam/2]) 
+    translate([0, -guideLength/2 + axleLength, axleHeight-bearingDiam/2]) 
     {
-        translate([0, 0, 0]) cube([guideWidth+2, bearingDiam*0.7, guideHeight], center = true);
+        translate([0, 0, guideHeight/2]) cube([guideWidth+2, bearingDiam*0.8, guideHeight], center = true);
+        translate([0, 0, -0.5]) cube([guideWidth+2, 1.5, guideHeight], center = true);
         rotate([0, 90, 0]) hull()
         {
-            cylinder(d=bearingDiam, h=guideWidth+2, center=true);
-            translate([-1.5, 0, 0]) cylinder(d=bearingDiam, h=guideWidth+2, center=true);
+            cylinder(d=bearingDiam, h=guideWidth+2, center=true, $fn=20);
+            translate([-1.75, 0, 0]) cylinder(d=bearingDiam, h=guideWidth+2, center=true, $fn=20);
         }
     }
 }
