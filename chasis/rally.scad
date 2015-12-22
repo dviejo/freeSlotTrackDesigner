@@ -96,3 +96,27 @@ difference()
     translate([-guideInternalWidth/2+1.5, 6/2, -1]) cylinder(d=2, h=4);
     translate([guideInternalWidth/2-1.5, 6/2, -1]) cylinder(d=2, h=4);
 }
+
+
+//rear
+rearWidth = 55;
+rearLength = 6;
+rearHeight = 3.25;
+
+module rear()
+difference()
+{
+    union()
+    {
+        translate([-rearWidth/2, 0, 0]) cube([rearWidth, rearLength, rearHeight]);
+        for(i=[-1,1])
+            translate([i*engineHolderHoleSep/2-6/2, 0, 0]) cube([6, rearLength+2.5+guideSupportLength/2-0.75, rearHeight]);
+    }
+    for(i=[-1,1])
+    {
+        translate([i*engineHolderHoleSep/2, rearLength+2.5, 2+0.3]) cylinder(d=2.5, h=guideHeight/2+2);
+        translate([i*engineHolderHoleSep/2, rearLength+2.5, -1]) cylinder(d=5, h=1+2.0);
+    }
+}
+
+translate([0, -40, 0]) rear();
