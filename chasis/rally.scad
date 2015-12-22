@@ -15,7 +15,7 @@ numSlots = 1;
 guideWidth = 32;
 guideInternalWidth = 21.5;
 guideHeight = 7;
-guideHoleHeight = 4.5;
+guideHoleHeight = 2.5;
 guideSupportLength = 7;
 guideLength = 32; //guideSupportLength + numSlots*4- 2;
 engineHolderHoleSep = 20;
@@ -41,8 +41,8 @@ difference()
     
     //main holes
     translate([0, guideSupportLength-1.5, 0]) cube([guideInternalWidth, guideLength, guideHeight*2], center=true);
-    translate([0, 0, guideHoleHeight-1.25]) cube([guideInternalWidth, guideLength+2, guideHeight], center=true);
-    translate([0, -(guideLength-6)/2-0.25, guideHoleHeight-1.25]) cube([25, 6, guideHeight], center=true);
+    translate([0, 0, 3.25]) cube([guideInternalWidth, guideLength+2, guideHeight], center=true);
+    translate([0, -(guideLength-6)/2-0.25, 3.25]) cube([25, 6, guideHeight], center=true);
     translate([0, guideSupportLength+6, 0]) cube([guideWidth - 2*2.5, guideLength, guideHeight*3], center=true);
     
     for(i=[1:numSlots])
