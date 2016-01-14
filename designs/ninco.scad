@@ -6,6 +6,8 @@
  * 
  * Created by Diego Viejo
  * 
+ * TODO: Add change in curve
+ * TODO: Add change in straight
  */
 
 include <../sizes.conf>
@@ -17,16 +19,23 @@ copperWidth = 4 + 4 + nincoSlotWidth;	//TODO Check
 
 module nincoStraight() translate([0, -nincoTrackWidth/2, 0]) 
   straight(copperWidth = 4 + 4 + nincoSlotWidth);
+
 module nincoHalfStraight() translate([0, -nincoTrackWidth/2, 0])
   straight(l=nincoStraightLength/2, copperWidth = 4 + 4 + nincoSlotWidth);
+
 module nincoQuarterStraight() translate([0, -nincoTrackWidth/2, 0])
   straight(l=nincoStraightLength/4, copperWidth = 4 + 4 + nincoSlotWidth);
 
 module nincoInterior() curve(copperWidth = 4 + 4 + nincoSlotWidth);
+
 module nincoHalfInterior() curve(deg=45/2, copperWidth = 4 + 4 + nincoSlotWidth);
+
 module nincoStandard() curve(r1=nincoRad2, r2=nincoRad3, copperWidth = 4 + 4 + nincoSlotWidth);
+
 module nincoHalfStandard() curve(r1=nincoRad2, r2=nincoRad3, deg=45/2, copperWidth = 4 + 4 + nincoSlotWidth);
+
 module nincoExterior() curve(r1=nincoRad3, r2=nincoRad4, deg=45/2, copperWidth = 4 + 4 + nincoSlotWidth);
+
 module nincoSuperExt() curve(r1=nincoRad4, r2=nincoRad5, deg=45/2, copperWidth = 4 + 4 + nincoSlotWidth);
 
 
