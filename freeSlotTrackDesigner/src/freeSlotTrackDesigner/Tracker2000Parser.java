@@ -4,6 +4,8 @@
 package freeSlotTrackDesigner;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.Scanner;
 
 /**
@@ -36,7 +38,15 @@ public class Tracker2000Parser {
 	
 	public int run()
 	{
-		File inputFile, outputFile;
+		File outputFile;
+		FileReader inputFile;
+		
+		try {
+			inputFile = new FileReader(fileNameInput);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return 0;
 	}
 	
