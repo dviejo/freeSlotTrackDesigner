@@ -17,9 +17,14 @@ public enum TramoPista {
 	nincoRectaCuarto(0f, 100.0f, 0f, 100.0f, 100.0f, false),
 	nincoRectaOctavo(0f, 50.0f, 0f, 50.0f, 50.0f, false),
 	//nincoCambioPista
-	nincoCurvaInterior();
+	nincoCurvaInterior(44.41f, 107.215f, -45f, 154.429f, 83.743f, false),
+	nincoCurvaInteriorMedia(11.542f, 58.024f, -22.5f, 77.2145f, 41.872f, false),
+	nincoCurvaEstandar(70.77f, 170.855f, -45f, 295.8f, 225.115f, false),
+	nincoCurvaEstandarMedia(18.393f, 92.466f, -22.5f, 147.9f, 112.557f, false),
+	nincoCurvaExterior(70.77f, 170.855f, -45f, 295.8f, 225.115f, false),
+	nincoCurvaSuperExterior(70.77f, 170.855f, -45f, 295.8f, 225.115f, false);
 	
-	public boolean isCambioOrientacion() {
+	public boolean getCambioOrientacion() {
 		return cambioOrientacion;
 	}
 
@@ -51,10 +56,18 @@ public enum TramoPista {
 	{
 		posX = x;
 		posY = y;
-		angulo = a;
+		setAngulo(a);
 		longIzquierdo = li;
 		longDerecho = ld;
 		cambioOrientacion = cambio;
+	}
+
+	public float getAngulo() {
+		return angulo;
+	}
+
+	public void setAngulo(float angulo) {
+		this.angulo = angulo;
 	}
 
 }
