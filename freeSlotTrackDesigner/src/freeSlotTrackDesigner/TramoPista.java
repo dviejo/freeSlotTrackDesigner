@@ -21,8 +21,8 @@ public enum TramoPista {
 	nincoCurvaInteriorMedia(11.542f, 58.024f, -22.5f, 77.2145f, 41.872f, false),
 	nincoCurvaEstandar(70.77f, 170.855f, -45f, 295.8f, 225.115f, false),
 	nincoCurvaEstandarMedia(18.393f, 92.466f, -22.5f, 147.9f, 112.557f, false),
-	nincoCurvaExterior(70.77f, 170.855f, -45f, 295.8f, 225.115f, false),
-	nincoCurvaSuperExterior(70.77f, 170.855f, -45f, 295.8f, 225.115f, false);
+	nincoCurvaExterior(38.945f, 195.790f, -22.5f, 218.586f, 183.243f, false),
+	nincoCurvaSuperExterior(52.647f, 264.673f, -22.5f, 289.272f, 253.929f, false);
 	
 	public boolean getCambioOrientacion() {
 		return cambioOrientacion;
