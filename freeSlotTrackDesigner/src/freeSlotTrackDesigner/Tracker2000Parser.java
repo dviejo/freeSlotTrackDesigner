@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
+import freeSlotTrackDesigner.TramoPista.TramoPistaE;
+
 /**
  * @author dviejo
  *
@@ -21,7 +23,7 @@ public class Tracker2000Parser {
 
 	private String fileNameInput, fileNameOutput; 
 	private ArrayList<TramoPista> listaTramos;
-	Map<String, Map<Integer, TramoPista>> fabricantes;
+	Map<String, Map<Integer, TramoPistaE>> fabricantes;
 	
 	public Tracker2000Parser(String fileName)
 	{
@@ -30,19 +32,19 @@ public class Tracker2000Parser {
 		listaTramos = new ArrayList<TramoPista>();
 		
 		//creamos el conjunto de fabricantes
-		fabricantes = new TreeMap<String, Map<Integer,TramoPista>>();
+		fabricantes = new TreeMap<String, Map<Integer,TramoPistaE>>();
 		
 		//NINCO
-		Map<Integer, TramoPista> ninco = new TreeMap<Integer,TramoPista>();
-		ninco.put(10102, TramoPista.nincoRectaStd);
-		ninco.put(10103, TramoPista.nincoRectaMedia);
-		ninco.put(10104, TramoPista.nincoRectaCuarto);
-		ninco.put(10105, TramoPista.nincoCurvaEstandar);
-		ninco.put(10112, TramoPista.nincoCurvaEstandarMedia);
-		ninco.put(10106, TramoPista.nincoCurvaInterior);
-		ninco.put(10113, TramoPista.nincoCurvaInteriorMedia);
-		ninco.put(10107, TramoPista.nincoCurvaExterior);
-		ninco.put(10108, TramoPista.nincoCurvaSuperExterior);
+		Map<Integer, TramoPistaE> ninco = new TreeMap<Integer,TramoPistaE>();
+		ninco.put(10102, TramoPistaE.nincoRectaStd);
+		ninco.put(10103, TramoPistaE.nincoRectaMedia);
+		ninco.put(10104, TramoPistaE.nincoRectaCuarto);
+		ninco.put(10105, TramoPistaE.nincoCurvaEstandar);
+		ninco.put(10112, TramoPistaE.nincoCurvaEstandarMedia);
+		ninco.put(10106, TramoPistaE.nincoCurvaInterior);
+		ninco.put(10113, TramoPistaE.nincoCurvaInteriorMedia);
+		ninco.put(10107, TramoPistaE.nincoCurvaExterior);
+		ninco.put(10108, TramoPistaE.nincoCurvaSuperExterior);
 		
 		fabricantes.put("NINCO", ninco);
 		
@@ -74,7 +76,8 @@ public class Tracker2000Parser {
 		int status;
 		int numTRACKS = -1; //valor 'number of TRACKS' del formato tr3
 		String fabricante;
-		Map<Integer, TramoPista> pistas = new TreeMap<Integer,TramoPista>();
+		ArrayList<TramoPista> circuito = new ArrayList<TramoPista>();
+		Map<Integer, TramoPistaE> pistasFabricante;
 		int errorCode = 0;
 		
 		float longIzdo, longDcho;
@@ -88,8 +91,8 @@ public class Tracker2000Parser {
 			fabricante = leerCadena(st);
 			if(fabricante!=null)
 			{
-				pistas = fabricantes.get(fabricante);
-				if(pistas!=null)
+				pistasFabricante = fabricantes.get(fabricante);
+				if(pistasFabricante!=null)
 				{
 					//leemos y desechamos los offsets
 					if(leerFloat(st)!=-1&&leerFloat(st)!=-1)
@@ -113,23 +116,26 @@ public class Tracker2000Parser {
 									codigoTramo = leerEntero(st);
 									if(codigoTramo!=-1)
 									{
-										tramoActual = pistas.get(codigoTramo);
+										tramoActual = new TramoPista(pistasFabricante.get(codigoTramo));
 										if(tramoActual != null)
 										{
-											System.out.print(tramoActual+ " ");
+											System.out.print(tramoActual.getTipoTramo()+ " ");
 											//leemos la altura y la desechamos
 											leerEntero(st);
 											//leemos el estado
 											status = leerEntero(st);
 											if(tramoActual.isCurva())
 											{
-												if(status==2) tramoActual.toggleOrientation();
+												if(status%2!=0) tramoActual.toggleOrientation();
 												if(tramoActual.getCambioOrientacion())
 													System.out.print("Curva Izquierda");
 												else
 													System.out.print("Curva Derecha");
 											}
 											System.out.println();
+											circuito.add(tramoActual);
+											longDcho += tramoActual.getLongDerecho();
+											longIzdo += tramoActual.getLongIzquierdo();
 										} else errorCode = -7;
 									} else errorCode = -6;
 								} //end for
@@ -143,6 +149,8 @@ public class Tracker2000Parser {
 			{
 			case 0:
 				System.out.println("Parser de fichero realizado correctamente");
+				System.out.println("Longitud carril Izdo: "+longIzdo/1000f+" m.");
+				System.out.println("Longitud carril Dcho: "+longDcho/1000f+" m.");
 				break;
 			case -1:
 				System.out.println("Error en la estructura del fichero (Fabricante)");
