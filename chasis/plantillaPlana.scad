@@ -27,4 +27,12 @@ difference()
             cylinder(d1=7, d2=3, h=1+3, $fn=20);
         }
     }
+    
+    //tension breakers
+    #for(i=[1:10-1])
+        translate([-ancho/2-1, i*(largo/10), 0.8])
+            cube([ancho+2, 0.5, alto-0.8-0.7]);
+    for(i=[-1,1])
+        translate([i*ancho/4, -1, 0.8])
+            cube([0.5, largo+2, alto-0.8-0.7]);
 }
