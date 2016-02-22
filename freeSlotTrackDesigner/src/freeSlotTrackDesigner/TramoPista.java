@@ -55,15 +55,20 @@ public class TramoPista
 		return cambio?tipoTramo.getLongIzquierdo():tipoTramo.getLongDerecho();
 	}
 	
-	
+	/**
+	 * 
+	 * @author dviejo
+	 *
+	 * Tracks are modeled by its center in the X axis
+	 */
 	public enum TramoPistaE {
 		nincoRectaStd(0f, 400.0f, 0f, 400.0f, 400.0f, false),
 		nincoRectaMedia(0f, 200.0f, 0f, 200.0f, 200.0f, false),
 		nincoRectaCuarto(0f, 100.0f, 0f, 100.0f, 100.0f, false),
 		nincoRectaOctavo(0f, 50.0f, 0f, 50.0f, 50.0f, false),
 		//nincoCambioPista
-		nincoCurvaInterior(44.41f, 107.215f, -45f, 154.429f, 83.743f, true),
-		nincoCurvaInteriorMedia(11.542f, 58.024f, -22.5f, 77.2145f, 41.872f, true),
+		nincoCurvaInterior(44.41f, 107.215f, -45f, 154.2286f, 83.5428f, true),
+		nincoCurvaInteriorMedia(11.542f, 58.024f, -22.5f, 77.1143f, 41.7714f, true),
 		nincoCurvaEstandar(70.77f, 170.855f, -45f, 295.8f, 225.115f, true),
 		nincoCurvaEstandarMedia(18.393f, 92.466f, -22.5f, 147.9f, 112.557f, true),
 		nincoCurvaExterior(38.945f, 195.790f, -22.5f, 218.586f, 183.243f, true),

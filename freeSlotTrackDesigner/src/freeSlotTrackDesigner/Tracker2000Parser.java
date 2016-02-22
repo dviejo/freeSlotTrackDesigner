@@ -224,6 +224,36 @@ public class Tracker2000Parser {
 		
 		//Obtenemos el nombre del fichero
 		if(args.length==1) ficEntrada = args[0];
+		
+		//por ahorrarme algo de trabajo
+		double x, y, length1, length2, radius;
+		int cont;
+		double angle45 = 45*Math.PI/180;
+		double angle225 = 22.5*Math.PI/180;
+		//pista ninco
+		ArrayList<String> curvas = new ArrayList<String>();
+		curvas.add("Interior"); curvas.add("Estandar"); curvas.add("Exterior"); curvas.add("SuperExterior");
+		//interior
+		x = (-151.37 * Math.cos(-angle45))+151.37;
+		y = -151.37 * Math.sin(-angle45);
+		length1 = 2*Math.PI*106.37*45/360;
+		length2 = 2*Math.PI*196.37*45/360;
+		System.out.println("Interior 45: ("+x+", "+y+") l1: "+length1+" l2: "+length2);
+		//estandar
+		x = (-331.37 * Math.cos(-angle45))+331.37;
+		y = -331.37 * Math.sin(-angle45);
+		length1 = 2*Math.PI*286.37*45/360;
+		length2 = 2*Math.PI*376.37*45/360;
+		System.out.println("Estandar 45: ("+x+", "+y+") l1: "+length1+" l2: "+length2);
+		for(cont=0,radius=151.37;cont<4;cont++,radius+=180)
+		{
+			x = (-radius * Math.cos(-angle225))+radius;
+			y = -radius * Math.sin(-angle225);
+			length1 = 2*Math.PI*(radius-45)*22.5/360;
+			length2 = 2*Math.PI*(radius+45)*22.5/360;
+			System.out.println(curvas.get(cont)+" 22.5: ("+x+", "+y+") l1: "+length1+" l2: "+length2);
+		}
+		
 
 		parser = new Tracker2000Parser(ficEntrada);
 		parser.run();
