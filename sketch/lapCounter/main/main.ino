@@ -144,7 +144,7 @@ void setup()
   running = false;
   
   lcd.begin(20, 4);
-  lcd.print("Lap Counter")
+  lcd.print("Lap Counter");
   
   delay(1000);
 }
