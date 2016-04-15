@@ -1,0 +1,58 @@
+Líneas de control
+
+Carril 1:
+- lectura sensor de paso
+- reset sensor de paso
+
+Carril 2:
+- lectura sensor de paso
+- reset sensor de paso
+
+Stop'N'Go:
+- activación corriente
+
+Semáforo:
+- Línea de set (encender luces rojas secuencialmente)
+- Línea de reset (apagar luces rojas)
+IGUAL SE PUEDE CON UNA SOLA SEÑAL
+
+Botones
+- Botón Start. Asociado a una interrupción. PIN2.
+- Botón Avanza >>
+- Botón Retrocede <<
+- Botón Set. Asociado a una interrupción. PIN3.
+
+Comunicación
+- Pin Rx. PIN0
+- Pin Tx. PIN1
+
+Buzzer
+- línea de buzzer
+
+Pantalla
+- Al menos 4/6 líneas. Buscar la posibilidad de conectar por i2c (2 líneas)
+
+TOTAL 2 + 2 + 1 + 2 + 4 + 2 = 13 + pantalla
+
+ARDUINO UNO - 20 líneas (6 analógicas)
+
+PIN0 - Rx Comunicación serie PC
+PIN1 - Tx Comunicación serie PC
+PIN2 - Botón Start, interrumpible
+PIN3 - Botón Set, interrumpible?
+PIN4 - InputLine1
+PIN5 - ResetLine1
+PIN6 - corrienteEnPista, PWM?
+PIN7 - InputLine2
+PIN8 - ResetLine2
+PIN9 - Buzzer
+PIN10 - LCD data0
+PIN11 - LCD data1
+PIN12 - LCD data2
+PIN13 - LCD data3
+PIN14 - setSemaforo
+PIN15 - resetSemaforo?
+PIN16
+PIN17
+PIN18 - Botón >>
+PIN19 - Botón <<
